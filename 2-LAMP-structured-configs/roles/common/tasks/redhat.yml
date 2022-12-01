@@ -1,0 +1,54 @@
+---
+# - name: Install Apache(latest, >=2.4)
+#   ansible.builtin.yum:
+#     name: httpd
+#     state: latest
+
+# - name: start and enable HTTPD
+#   service: 
+#     name: httpd
+#     enabled: yes
+#     state: started
+
+# - name: Install MYSQL(MariaDB)
+#   yum:
+#     name: 
+#       - mariadb-server
+#       - mariadb 
+#     state: latest
+
+# - name: Install PIP
+#   yum:
+#     name: python3-pip
+#     state: latest
+
+# - name: Install Python MySQL connector
+#   ansible.builtin.pip:
+#     name: PyMySQL
+
+# - name: Start and enable MYSQL(MariaDB)
+#   service:
+#     name: mariadb
+#     enabled: yes
+#     state: started
+
+# - name: Install PHP
+#   yum:
+#     name: 
+#       - php
+#       - php-mysqlnd
+#       - php-pdo
+#       - php-gd
+#     state: latest
+
+# - name: Allow port 80
+#   ansible.posix.firewalld:
+#     port: 80/tcp
+#     permanent: yes
+#     immediate: yes
+#     state: enabled
+
+# - name: restart HTTPD
+#   service: 
+#     name: httpd
+#     state: restarted

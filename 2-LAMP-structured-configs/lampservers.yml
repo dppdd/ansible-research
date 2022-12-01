@@ -1,0 +1,6 @@
+---
+- hosts: lampservers
+  become: true
+  roles:
+    - common
+    - webtier

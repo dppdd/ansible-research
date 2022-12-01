@@ -1,0 +1,51 @@
+---
+- name: Refresh apt cache
+  apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Install Apache
+  apt:
+    name: "apache2"
+    state: present
+
+- name: Install MySQL(MariaDB)
+  apt:
+    name: mariadb-server
+    state: present
+
+- name: Install PHP
+  apt:
+    name: php
+    state: present
+
+- name:  Install PHP-CGI(FPM)
+  apt:
+    name: php-cgi
+    state: present
+
+- name: Install PHP-CLI
+  apt:
+    name: php-cli
+    state: present
+
+- name: Install apache2 php module
+  apt:
+    name: libapache2-mod-php
+    state: present
+
+- name: Install PHP MySQL Client
+  apt:
+    name: php-mysql
+    state: latest
+
+- name: Install Python MySQL Client
+  apt:
+    name: python3-mysqldb
+    state: latest
+
+- name: Enable Apache Module - mod_rewrite
+  apache2_module:
+    state: present
+    name: rewrite
+
