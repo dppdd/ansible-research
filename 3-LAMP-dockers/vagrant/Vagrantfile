@@ -1,12 +1,22 @@
 Vagrant.configure("2") do |config|
 
-    config.vm.define "wpdocker" do |wpdocker|
-        wpdocker.vm.box="generic/ubuntu2004"
-        wpdocker.vm.hostname = "wpdocker"
-        wpdocker.vm.network "private_network", ip: "192.168.111.201"
-        wpdocker.vm.provision "shell", path: "provisioning-script.sh"
-        wpdocker.vm.provider :virtualbox do |vb|
+    config.vm.define "wpdockerubuntu" do |wpdockerubuntu|
+        wpdockerubuntu.vm.box="generic/ubuntu2004"
+        wpdockerubuntu.vm.hostname = "wpdockerubuntu"
+        wpdockerubuntu.vm.network "private_network", ip: "192.168.111.201"
+        wpdockerubuntu.vm.provision "shell", path: "provisioning-script.sh"
+        wpdockerubuntu.vm.provider :virtualbox do |vb|
             vb.customize ["modifyvm", :id, "--memory", "2048"]
+      end
+    end
+
+    config.vm.define "wpdockercentos" do |wpdockercentos|
+        wpdockercentos.vm.box="generic/centos9s"
+        wpdockercentos.vm.hostname = "wpdockercentos"
+        wpdockercentos.vm.network "private_network", ip: "192.168.111.202"
+        wpdockercentos.vm.provision "shell", path: "provisioning-script.sh"
+        wpdockercentos.vm.provider :virtualbox do |vb|
+            vb.customize ["modifyvm", :id, "--memory", "1024"]
       end
     end
 
