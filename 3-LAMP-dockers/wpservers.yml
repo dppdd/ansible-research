@@ -1,0 +1,8 @@
+---
+- hosts: 
+  - centos
+  - ubuntu
+  become: true
+  roles:
+    - docker
+    - wordpress

@@ -1,0 +1,3 @@
+db_volume: mariadb
+wordpress: wordpress
+net: wpnetwork
