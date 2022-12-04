@@ -12,10 +12,10 @@
     volumes:
       - "{{db_volume}}:/var/lib/mysql"
     env:
-      MYSQL_ROOT_PASSWORD: somerootpassword
-      WORDPRESS_DB_PASSWORD: somemysqlpassword
-      WORDPRESS_DB_NAME: db
-      WORDPRESS_DB_USER: mysqluser
+      MARIADB_ROOT_PASSWORD: "{{MARIADB_ROOT_PASSWORD}}"
+      MARIADB_DATABASE: "{{MARIADB_DATABASE}}"
+      MARIADB_USER: "{{MARIADB_USER}}"
+      MARIADB_PASSWORD: "{{MARIADB_PASSWORD}}"
 
 - name: Deploy WordPress app
   docker_container:
@@ -28,9 +28,9 @@
     links:
       - "{{db_volume}}:/var/lib/mysql"
     volumes:
-      - "{{wordpress}}:/var/www/html"
+      - "{{wpfs_vol}}:/var/www/html"
     env:
-      WORDPRESS_DB_PASSWORD: somemysqlpassword
-      WORDPRESS_DB_NAME: db
-      WORDPRESS_DB_USER: mysqluser
+      WORDPRESS_DB_PASSWORD: "{{MARIADB_PASSWORD}}"
+      WORDPRESS_DB_NAME: "{{MARIADB_DATABASE}}"
+      WORDPRESS_DB_USER: "{{MARIADB_USER}}"
       WORDPRESS_DB_HOST: mariadb
