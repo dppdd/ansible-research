@@ -1,6 +1,6 @@
 # ansible-research
 
-The repository contain the following directories.  
+The repository contains the following directories.  
 
     ├── 1-LAMP-one-playbook         # Sample ansible usage.
     ├── 2-LAMP-structured-configs   # A bit more advanced usage with roles, handlers, vars
