@@ -1,0 +1,4 @@
+---
+- name: Create Docker bridge network
+  docker_network:
+    name: "{{net}}"
