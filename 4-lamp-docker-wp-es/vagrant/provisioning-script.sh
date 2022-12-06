@@ -1,0 +1,6 @@
+#!/bin/bash
+# Adding authorized key to the instance
+
+echo "Adding authorized key to the instance"
+
+echo "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDOl+EpL2bydl06XEcRdWG98VRylrA6pQVjJGxFifRzVLqcFNZKAwqGhLL2hv0MWuQcBdzFEuoJ/vQbUmtkrkkKUtX+/FRDnC1l/P+LbemtrbxzfLzKomAXIzbr5LrAEd4HfeCXFix/CFS9AyS7qBJm8OsFZT5z7obu2mG1weE7KV9EJ33iwdTx2tXoA8RFR6ZPEbnis9TKLJT4OKHhG9SZQpS5tAvdoDkyz9ZPMh+bQKMS3tkGQeNeJHBUDm77p4IY7Vp7in1cVkWhC+s8y4cXSUsLQftsBPBPHFLz/dxQLtpm+RsQbZgCv7HN/IxF8t/ddVaTixINTJErDPaxLbyAeCnmAdmEvQShxIpVsdHcPcA8t6qk+/ZqlohxCzUASDA16ATd2T26C9GTw5GTtpSGQ3FYcnZ4moV4x2NDnh4RLADrZIQTy4HtD7x56LcJBwB7PC49UKm+KS1TMprEDfw6lQAqI/sxNHeUb6E/fw7eg8LdDjNvDoDV1kKpJMsDIRk= demiro@DESKTOP-78KJTQF" >> /home/vagrant/.ssh/authorized_keys

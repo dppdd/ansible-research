@@ -1,0 +1,4 @@
+es_config: /etc/elasticsearch/elasticsearch.yml
+logstash_config: /etc/logstash/jvm.options
+beats_config: /etc/logstash/conf.d/beats.conf
+kibana_config: /etc/kibana/kibana.yml

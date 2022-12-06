@@ -1,0 +1,11 @@
+---
+- hosts: 
+  - monitoring
+  become: true
+  roles:
+    - monitoring-env
+- hosts:
+  - containers
+  become: true
+  roles:
+    - monitoring-init

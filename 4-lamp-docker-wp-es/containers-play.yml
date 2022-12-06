@@ -1,0 +1,8 @@
+---
+- hosts: 
+  - containers
+  # - staging
+  become: true
+  roles:
+    - containers-env
+    - containers-apps

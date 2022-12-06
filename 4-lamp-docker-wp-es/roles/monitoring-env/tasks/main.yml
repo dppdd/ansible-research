@@ -1,0 +1,147 @@
+# ---
+
+# # TODO: - name: ES config - Make backup of config file
+
+
+# - name: Install Elasticsearch, .deb package
+#   ansible.builtin.apt:
+#     deb: https://artifacts.elastic.co/downloads/elasticsearch/elasticsearch-8.5.2-amd64.deb
+#     state: present
+
+# - name:  Set Java heap size
+#   ansible.builtin.template:
+#     src: jvm.options.j2
+#     dest: /etc/elasticsearch/jvm.options.d/jvm.options
+#     owner: root
+#     group: elasticsearch
+#     mode: '0644'
+#   notify:
+#     - restart elasticsearch
+
+# - name: ES config - Set up network host
+#   ansible.builtin.replace:
+#     path: "{{es_config}}"
+#     regexp: '#network.host: 192.168.0.1'
+#     replace: 'network.host: ["localhost", "{{inventory_hostname}}"]'
+
+# - name: ES config - Port
+#   ansible.builtin.replace:
+#     path: "{{es_config}}"
+#     regexp: '#http.port: 9200'
+#     replace: 'http.port: 9200'
+
+
+# - name: ES config - Cluster name
+#   ansible.builtin.replace:
+#     path: "{{es_config}}"
+#     regexp: '#cluster.name: my-application'
+#     replace: 'cluster.name: mycluster'
+
+# - name: ES config - Node name
+#   ansible.builtin.replace:
+#     path: "{{es_config}}"
+#     regexp: '#node.name: node-1'
+#     replace: 'node.name: monitoring'
+
+
+# # Turn Off the Security Mode of Elasticsearch
+# # for education purposes
+
+# - name: ES config -Disable Security Mode
+#   ansible.builtin.replace:
+#     path: "{{es_config}}"
+#     regexp: 'xpack.security.enabled: true'
+#     replace: 'xpack.security.enabled: false'
+#   notify:
+#     - restart elasticsearch
+
+# - name: Start and enable Elasticsearch
+#   ansible.builtin.service:
+#     state: started
+#     enabled: yes
+#     name: elasticsearch
+
+
+# # http://docs.ansible.com/ansible/latest/collections/ansible/builtin/expect_module.html
+# # - name: Generic question with multiple different responses
+# #   ansible.builtin.expect:
+# #     command: /usr/share/elasticsearch/bin/elasticsearch-reset-password -u elastic --force --auto -s
+# #     responses:
+# #       "Please confirm that you would like to continue [y/N]" : "y"
+
+
+
+
+# ##############################################################################
+# ##############################################################################
+
+
+# - name: Install Logstash
+#   ansible.builtin.apt:
+#     deb: https://artifacts.elastic.co/downloads/logstash/logstash-8.5.2-amd64.deb
+#     state: present
+
+# - name: Logstash config - Change Java heap size - XMS
+#   ansible.builtin.replace:
+#     path: "{{logstash_config}}"
+#     regexp: '-Xms1g'
+#     replace: '-Xms512m'
+
+# - name: Logstash config - Change Java heap size - XMX
+#   ansible.builtin.replace:
+#     path: "{{logstash_config}}"
+#     regexp: '-Xmx1g'
+#     replace: '-Xmx512m'
+
+# - name:  Logstash config - Configure beats pipeline
+#   ansible.builtin.template:
+#     src: beatsconf.j2
+#     dest: "{{beats_config}}"
+#     mode: '0644'
+
+# - name: Start and enable Logstash
+#   ansible.builtin.service:
+#     state: started
+#     enabled: yes
+#     name: logstash
+
+
+
+# ##############################################################################
+# ##############################################################################
+
+# - name: Install Kibana
+#   ansible.builtin.apt:
+#     deb: https://artifacts.elastic.co/downloads/kibana/kibana-8.5.2-amd64.deb
+#     state: present
+
+
+# - name: Start and enable Kibana
+#   ansible.builtin.service:
+#     state: started
+#     enabled: yes
+#     name: kibana
+
+# - name: Kibana post config
+#   lineinfile:
+#         path: "{{kibana_config}}"
+#         regexp: "{{item.regexp}}"
+#         line: "{{item.line}}"
+#   with_items:
+#     - {
+#         "regexp": '#server.host: "localhost"',
+#         "line": "server.host: \"{{inventory_hostname}}\"",
+#       }
+#     - {
+#         "regexp": "#server.name: \"your-hostname\"",
+#         "line": "server.name: \"monitoring\"",
+#       }
+#     - {
+#         "regexp": '#elasticsearch.hosts: ["http://localhost:9200"]',
+#         "line": 'elasticsearch.hosts: ["http://localhost:9200"]',
+#       }
+#     - {
+#       "regexp": '#server.publicBaseUrl: ""',
+#       "line": 'server.publicBaseUrl: "{{inventory_hostname}}:5601"',
+#     }
+#   notify: restart kibana

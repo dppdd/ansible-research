@@ -1,0 +1,52 @@
+# "{{inventory_hostname}}"
+
+
+# - name: Install Metricbeat
+#   ansible.builtin.apt:
+#     deb: https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-8.5.2-amd64.deb
+#     state: present
+#####################
+# - name: Print beats URL
+#   debug:
+#     msg: "https://artifacts.elastic.co/downloads/beats/metricbeat/metricbeat-{{es_version}}-amd64.deb"
+
+
+
+### TODO: research loops and finally iterate such tasks
+- name: Metricbeat config  -Disable the Elasticsearch output and enable the Logstash output 1
+  ansible.builtin.replace:
+    path: "/home/vagrant/metricbeat.yml"
+    regexp: 'output.elasticsearch:'
+    replace: '#output.elasticsearch:'
+
+- name: Metricbeat config - Disable the Elasticsearch output and enable the Logstash output 2
+  ansible.builtin.replace:
+    path: "/home/vagrant/metricbeat.yml"
+    regexp: 'hosts: \["localhost:9200"\]'
+    replace: '#hosts: \["localhost:9200"\]'
+
+- name: Metricbeat config - Disable the Elasticsearch output and enable the Logstash output 3
+  ansible.builtin.replace:
+    path: "/home/vagrant/metricbeat.yml"
+    regexp: '#output.logstash:'
+    replace: 'output.logstash:'
+
+- name: Metricbeat config - Disable the Elasticsearch output and enable the Logstash output 4
+  ansible.builtin.replace:
+    path: "/home/vagrant/metricbeat.yml"
+    regexp: '#hosts: \["localhost:5044"\]'
+    replace: 'hosts: \["localhost:5044"\]'
+
+
+- name: Metricbeat config - Disable the Elasticsearch output and enable the Logstash output 5
+  ansible.builtin.replace:
+    path: "/home/vagrant/metricbeat.yml"
+    regexp: ''
+    replace: '
+
+
+# # - substitute localhost with Logstash server
+# sed -i 's/#hosts: \["localhost:5044"\]/hosts: \["localhost:5044"\]/' $m_conf
+# sed -i "s/localhost:5044/${master_ip}:5044/" $m_conf 
+# # TODO: setup this as condition
+# metricbeat test config
