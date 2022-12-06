@@ -1,7 +1,10 @@
 ---
-- name:
-  # import_tasks: wp-mysql-deploy.yml
-  import_tasks:
-    - docker-network.yml
-    - docker-mariadb.yml
-    - docker-wordpress.yml
+
+- name: Setup docker network
+  import_tasks: docker-network.yml
+
+- name: Setup docker mariadb container
+  import_tasks: docker-mariadb.yml
+
+- name: Setup docker wordpress container
+  import_tasks: docker-wordpress.yml
