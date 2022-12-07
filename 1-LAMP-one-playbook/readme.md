@@ -9,23 +9,23 @@ ansible.cfg is used for deactivating host key checks and defining inventory file
 
 1. Start the virtual machines:  
 
-    cd Vagrant/ && vagrant up  
+        cd Vagrant/ && vagrant up  
 
-    cp vagrant_rsa ~/.ssh/
+        cp vagrant_rsa ~/.ssh/
 
 2. Deploy:  
 
-    ansible-playbook playbook.yaml
+        ansible-playbook playbook.yaml
 
 3. Verify:  
 
-    curl http://192.168.111.201
-    curl http://192.168.111.202
+        curl http://192.168.111.201
+        curl http://192.168.111.202
 
 4. Destroy virtual machines:  
 
-    vagrant destroy --force
-    rm ~/.ssh/vagrant_rsa
+        vagrant destroy --force
+        rm ~/.ssh/vagrant_rsa
 
 
 * **Cloud setup**
