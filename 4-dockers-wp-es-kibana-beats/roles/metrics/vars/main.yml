@@ -1,2 +1,1 @@
-es_version: 5.8.2
 metricbeat_config: /etc/metricbeat/metricbeat.yml

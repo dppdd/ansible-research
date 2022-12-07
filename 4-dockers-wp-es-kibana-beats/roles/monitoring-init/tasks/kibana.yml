@@ -1,0 +1,34 @@
+- name: Install Kibana
+  ansible.builtin.apt:
+    deb: https://artifacts.elastic.co/downloads/kibana/kibana-8.5.2-amd64.deb
+    state: present
+
+- name: Kibana post config
+  lineinfile:
+        path: "{{kibana_config}}"
+        regexp: "{{item.regexp}}"
+        line: "{{item.line}}"
+  with_items:
+    - {
+        "regexp": '#server.host: "localhost"',
+        "line": "server.host: \"{{inventory_hostname}}\"",
+      }
+    - {
+        "regexp": "#server.name: \"your-hostname\"",
+        "line": "server.name: \"monitoring\"",
+      }
+    - {
+        "regexp": '#elasticsearch.hosts: ["http://localhost:9200"]',
+        "line": 'elasticsearch.hosts: ["http://localhost:9200"]',
+      }
+    - {
+      "regexp": '#server.publicBaseUrl: ""',
+      "line": 'server.publicBaseUrl: "http://{{inventory_hostname}}:5601"',
+    }
+  notify: restart kibana
+
+- name: Start and enable Kibana
+  ansible.builtin.service:
+    state: started
+    enabled: yes
+    name: kibana

@@ -1,0 +1,28 @@
+- name: Install Logstash
+  ansible.builtin.apt:
+    deb: https://artifacts.elastic.co/downloads/logstash/logstash-8.5.2-amd64.deb
+    state: present
+
+- name: Logstash config - Change Java heap size - XMS
+  ansible.builtin.replace:
+    path: "{{logstash_config}}"
+    regexp: '-Xms1g'
+    replace: '-Xms512m'
+
+- name: Logstash config - Change Java heap size - XMX
+  ansible.builtin.replace:
+    path: "{{logstash_config}}"
+    regexp: '-Xmx1g'
+    replace: '-Xmx512m'
+
+- name:  Logstash config - Configure beats pipeline
+  ansible.builtin.template:
+    src: beatsconf.j2
+    dest: "{{beats_config}}"
+    mode: '0644'
+
+- name: Start and enable Logstash
+  ansible.builtin.service:
+    state: started
+    enabled: yes
+    name: logstash
