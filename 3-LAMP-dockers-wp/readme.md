@@ -24,7 +24,14 @@ The file structure is similar to the previous one, outlined in ansible doc's bes
     │   ├── Vagrantfile
     │   ├── provisioning-script.sh
     │   └── vagrant_rsa
-    └── wpservers.yml                       # Define roles and servers for execution. TODO: better naming
+    └── wpservers.yml                       # Define roles and servers for execution.
 
-Run with
+Entry point:  
+
+    $ cat site.yml
+    ---
+    - import_playbook: wpservers.yml
+
+Run with  
+
     ansible-playbook site.yml
