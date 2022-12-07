@@ -1,7 +1,8 @@
 # Build LAMP stack  
-using the best practices outlined in ansible docs
 
-Here we continue the ansible research and tests, using a bit more complex file structure. Below you can find the used structure.
+Deploying LAMP stack on Debian or RedHad based distributions. Then, seting up WordPress application.
+
+ File structure:
 
 
     ├── ansible.cfg                    # Define SSH user, key and disable host key verification 
