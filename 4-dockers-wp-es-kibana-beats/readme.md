@@ -1,6 +1,6 @@
 # WordPress on dockers monitored by ElasticSearch
 
-WordPress and MariaDB dockers running on nodes labaled as *containers.* On these containers Metricbeat is also configured to send its metrics to monitoring server.
+WordPress and MariaDB dockers running on nodes labaled as *containers.* Metricbeat is also installed and configured to send its metrics to monitoring server.
 
 File Structure:  
 
@@ -57,7 +57,8 @@ Entry point:
     - import_playbook: playbook-containers.yml
     - import_playbook: playbook-monitoring.yml
 
-To run the configuration, execute:
+To run the configuration, execute:  
+
     ansible-playbook site.yml
 
 If you used the provided vagrant boxes, access Kibana at http://192.168.111.202:5601, and WordPress applications directly via their node IPs, e.g.  http://192.168.111.201.
