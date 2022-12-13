@@ -56,8 +56,5 @@
         "regexp": "define\\( 'DB_PASSWORD', '(.)+' \\);",
         "line": "define( 'DB_PASSWORD', '{{dbpass}}' );",
       }
-
-- name: ensure web-server restart
-  service:
-    name: httpd
-    state: restarted
+  notify:
+      - restart apache
