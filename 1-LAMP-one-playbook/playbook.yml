@@ -114,8 +114,11 @@
             "regexp": "define\\( 'DB_PASSWORD', '(.)+' \\);",
             "line": "define( 'DB_PASSWORD', '{{dbpass}}' );",
           }
+      notify:
+      - restart apache
     
-    - name: ensure web-server restart
-      service:
+  handlers:
+    - name: restart apache
+      ansible.builtin.service:
         name: apache2
         state: restarted
