@@ -6,25 +6,30 @@ A simple way with Ansible, to automate deployment of WordPress application on do
 
 Currently, only CentOs playbook is developed. Once you set up the server, you should perform the following steps.
 
-1. Open ./ansible.cfg and define the remote ssh user and ssh port if not 22 is used.  
+1. Open `./ansible.cfg` and define the remote ssh user and ssh port if not 22 is used.  
 
-1. Add the IP(s) of the server in ./inventory.
+1. Add the IP(s) of the server in `./inventory`.
 
-1. Define the production domain and email address that should be used by the Certbot in
-    ./roles/docker-containers/vars:
-    production_domain
-    production_email
+1. Define the production domain and email address for Certbot and Nginx in:  
+
+```sh
+./roles/docker-containers/vars:
+production_domain
+production_email
+```
 
 1. Test the connection
-    ansible all -m ping
+`ansible all -m ping`
 
-1. Execute the configuration
-    ansible-playbook site.yml
+1. Execute the configuration  
+```sh
+ansible-playbook site.yml
+```
 
 ## In-depth description of the project
 
 The automation workflow is as follows.  
-- playbook-localhost.yml - Localhost environment is preparated. Python Docker SDK is required.  
+- playbook-localhost.yml - Localhost environment is preparated.
 - playbook-security.yml - Allow ports on the servers. Here we add all security-related tasks in regards to the node.  
 - playbook-docker-env.yml - Prepare the docker environment, install all oficially advised services.  
 - playbook-containers.yml - Deploy all required docker images. We will check this playbook's roles in detail below.
