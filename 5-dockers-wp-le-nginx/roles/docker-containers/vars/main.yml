@@ -1,7 +1,7 @@
 # Define Domain for the website
-production_domain:
+production_domain: replace_with_production_domain
 # And email for Lets Encrypt certificactes
-production_email:
+production_email: replace_with_email_for_certbot
 
 
 # Database env vars
