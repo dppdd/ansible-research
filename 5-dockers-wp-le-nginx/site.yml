@@ -1,5 +1,5 @@
 ---
-# - import_playbook: playbook-security.yml
-# - import_playbook: playbook-localhost.yml
-# - import_playbook: playbook-docker-env.yml
+- import_playbook: playbook-localhost.yml
+- import_playbook: playbook-security.yml
+- import_playbook: playbook-docker-env.yml
 - import_playbook: playbook-containers.yml
