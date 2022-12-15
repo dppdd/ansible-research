@@ -1,0 +1,5 @@
+- hosts:
+  - containers
+  become: yes
+  roles:
+    - security

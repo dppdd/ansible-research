@@ -1,0 +1,10 @@
+---
+- name: check if cert files exist
+  stat: 
+    path: "{{on_host_certbot_data_certs}}/privkey.pem"
+  register: has_key
+
+
+- name: generate self-signed cert
+  command: "openssl req -x509 -newkey rsa:4096 -sha256 -nodes -keyout \"{{on_host_certbot_data_certs}}/privkey.pem\" -out \"{{on_host_certbot_data_certs}}/fullchain.pem\" -subj \"/CN=example.com\" -days 14"
+  when: has_key.stat.exists != True

@@ -1,0 +1,52 @@
+# Define Domain for the website
+production_domain:
+# And email for Lets Encrypt certificactes
+production_email:
+
+
+# Database env vars
+MARIADB_ROOT_PASSWORD: examplerootpass
+MARIADB_DATABASE: wpdockerdb
+MARIADB_USER: wpdockeruser
+MARIADB_PASSWORD: wpdockerpass
+
+
+db_volume_name: wpdb
+on_docker_mysql_lib_path: /var/lib/mysql
+
+
+wp_files_volume_name: wpfiles
+on_docker_wp_files_path: /var/www/html
+
+
+# Names of the docker containers below
+container_name_nginx: nginx-proxy
+container_name_db: mariadb
+container_name_certbot_issue: certbotissue
+container_name_wp: wordpress
+docker_wp_net: wpnetwork
+
+
+on_host_base: /opt
+on_host_logs_dir: "{{on_host_base}}/logs"
+on_host_le_renew_log: "{{on_host_logs_dir}}/renew_log"
+
+
+on_host_nginx_config_dir: "{{on_host_base}}/nginx-config"
+on_host_nginx_config_file: "{{on_host_nginx_config_dir}}/nginx.conf"
+
+
+on_host_certbot_base: "{{on_host_base}}/certbot"
+on_host_certbot_data_path: "{{on_host_certbot_base}}/conf"
+on_host_certbot_data_certs: "{{on_host_certbot_data_path}}/live/{{production_domain}}"
+on_host_certbot_data_www:   "{{on_host_certbot_base}}/www"
+
+
+on_docker_certbot_www: /var/www/certbot
+on_docker_le_system_path: /etc/letsencrypt/live
+le_acme_challenge_route: /.well-known/acme-challenge/
+
+
+on_docker_nginx_conf_file: /etc/nginx/nginx.conf
+on_docker_nginx_le_path: /etc/letsencrypt
+on_docker_nginx_le_path_www: /var/www/certbot

@@ -1,0 +1,4 @@
+---
+- name: Install Python SDK
+  ansible.builtin.pip:
+    name: docker

@@ -1,0 +1,13 @@
+---
+- name: Deploy MariaDB
+  docker_container:
+    image: mariadb
+    name: "{{container_name_db}}"
+    network_mode: "{{docker_wp_net}}"
+    volumes:
+      - "{{db_volume_name}}:{{on_docker_mysql_lib_path}}"
+    env:
+      MARIADB_ROOT_PASSWORD: "{{MARIADB_ROOT_PASSWORD}}"
+      MARIADB_DATABASE: "{{MARIADB_DATABASE}}"
+      MARIADB_USER: "{{MARIADB_USER}}"
+      MARIADB_PASSWORD: "{{MARIADB_PASSWORD}}"

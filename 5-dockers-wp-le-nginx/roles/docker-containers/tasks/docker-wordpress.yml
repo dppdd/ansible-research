@@ -1,0 +1,18 @@
+---
+- name: Deploy WordPress app
+  docker_container:
+    image: wordpress
+    name: "{{container_name_wp}}"
+    restart_policy: always
+    network_mode: "{{docker_wp_net}}"
+    ports:
+      - "8080:80"
+    links:
+      - "{{db_volume_name}}:{{on_docker_mysql_lib_path}}"
+    volumes:
+      - "{{wp_files_volume_name}}:{{on_docker_wp_files_path}}"
+    env:
+      WORDPRESS_DB_PASSWORD: "{{MARIADB_PASSWORD}}"
+      WORDPRESS_DB_NAME: "{{MARIADB_DATABASE}}"
+      WORDPRESS_DB_USER: "{{MARIADB_USER}}"
+      WORDPRESS_DB_HOST: mariadb

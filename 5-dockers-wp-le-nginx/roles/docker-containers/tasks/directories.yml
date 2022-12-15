@@ -1,0 +1,33 @@
+---
+
+- name: Create logs directory
+  ansible.builtin.file:
+    path: "{{on_host_logs_dir}}"
+    state: directory
+    mode: '0755'
+
+- name: Create Nginx config directory
+  ansible.builtin.file:
+    path: "{{on_host_nginx_config_dir}}"
+    state: directory
+    mode: '0755'
+
+- name: Upload the Nginx conf template
+  ansible.builtin.template:
+    src: nginx-conf.j2
+    dest: "{{on_host_nginx_config_file}}"
+    group: root
+    owner: root
+    mode: 0644
+
+- name: Create Certbot live and domain dir
+  ansible.builtin.file:
+    path: "{{on_host_certbot_data_certs}}"
+    state: directory
+    mode: '0755'
+
+- name: Create Certbot www dir
+  ansible.builtin.file:
+    path: "{{on_host_certbot_data_www}}"
+    state: directory
+    mode: '0755'

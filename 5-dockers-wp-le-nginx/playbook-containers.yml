@@ -1,0 +1,6 @@
+---
+- hosts:
+  - containers
+  become: yes
+  roles:
+    - docker-containers

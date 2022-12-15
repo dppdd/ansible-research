@@ -1,0 +1,50 @@
+---
+- name: Pull an image
+  community.docker.docker_image:
+    name: certbot/certbot
+    source: pull
+
+## #
+# Only if cert.pem is missing
+# create certtbot container to issue cert.
+#
+# cert.pem is not created with the self signed ssl
+## #
+
+- name: Register rule for LE certificate existance
+  stat: 
+    path: "{{on_host_certbot_data_certs}}/cert.pem"
+  register: reg_rule_le
+
+- name: Issue LE SSL certificate if not available
+  block:
+    - name: remove dir
+      ansible.builtin.file:
+        path: "{{on_host_certbot_data_certs}}"
+        state: absent
+
+    - name: recreate directory
+      ansible.builtin.file:
+        path: "{{on_host_certbot_data_certs}}"
+        state: directory
+
+    - name: Create Certbot container and force renew
+      docker_container:
+        image: certbot/certbot
+        name: "{{container_name_certbot_issue}}"
+        volumes:
+          - "{{on_host_certbot_data_path}}:/etc/letsencrypt"
+          - "{{on_host_certbot_data_www}}:/var/www/certbot"
+        state: started
+        auto_remove: true
+        command: certonly --webroot -w /var/www/certbot --force-renewal --email "{{production_email}}" -d "{{production_domain}}" --agree-tos
+    
+    - name: Reload Nginx
+      community.docker.docker_container_exec:
+        container: nginx-proxy
+        command: nginx -s reload
+      register: result
+    - name: print stderr
+      debug:
+        var: result.stderr
+  when: reg_rule_le.stat.exists == False

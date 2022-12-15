@@ -1,0 +1,25 @@
+---
+
+- name: Warm up by creating directories and uploading templates and files
+  import_tasks: directories.yml
+
+- name: Create Docker network
+  import_tasks: docker-network.yml
+
+- name: Create and start MariaDB container
+  import_tasks: docker-mariadb.yml
+
+- name: Create and start WordPress container
+  import_tasks: docker-wordpress.yml
+
+- name: Generate Self Signed SSL if required
+  import_tasks: self-signed-ssl.yml
+
+- name: Create and start Nginx container
+  import_tasks: docker-nginx-reverse.yml
+
+- name: Deploy Certbot
+  import_tasks: docker-certbot.yml
+
+- name: Create Crons for LE Renewal and Nginx reload
+  import_tasks: cronjob-certbot.yml
