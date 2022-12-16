@@ -7,8 +7,6 @@
 - name: Cron Job - LE renewal attemp on every 12 hours
   ansible.builtin.cron:
     name: "LE SSL renewal attempt"
-    month: "*"
-    day: "*"
     hour: "*/12"
     job: "date >> {{on_host_le_renew_log}} && docker run --rm --name certbotrenew -v {{on_host_certbot_data_path}}:/etc/letsencrypt -v {{on_host_certbot_data_www}}:/var/www/certbot  certbot/certbot renew >> {{on_host_le_renew_log}}"
     state: "present"
@@ -16,8 +14,6 @@
 - name: Cron Job - nginx reload on every 6 hours
   ansible.builtin.cron:
     name: "Nginx reload"
-    month: "*"
-    day: "*"
     hour: "*/6"
     job: "docker container exec {{container_name_nginx}} nginx -s reload"
     state: "present"
