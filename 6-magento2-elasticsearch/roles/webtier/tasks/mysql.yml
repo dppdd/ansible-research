@@ -1,0 +1,25 @@
+---
+# mysql.yml
+#
+# Additional to MySQL server installation we 
+# install the required Python MySQL Connector
+# so we can apply CRUD on MySQL DBs
+#
+
+- name: Install MySQL(MariaDB)
+  ansible.builtin.dnf:
+    name: 
+      - mariadb-server
+      - mariadb
+    state: latest
+
+# Manage(CRUD) MySQL DBs with ansible
+- name: Install Python MySQL connector
+  ansible.builtin.pip:
+    name: PyMySQL
+
+- name: Start and enable MYSQL(MariaDB)
+  ansible.builtin.service:
+    name: mariadb
+    enabled: yes
+    state: started

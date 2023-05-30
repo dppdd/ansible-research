@@ -1,0 +1,17 @@
+---
+# httpd.yml
+#
+# Service enable action is not a handler. That way
+# we can easily stop the service and perform an upgrade
+#
+### TODO: specify the exact HTTPD version to be installed
+- name: Install Apache(latest)
+  ansible.builtin.dnf:
+    name: httpd
+    state: latest
+
+- name: Start and enable HTTPD
+  ansible.builtin.service: 
+    name: httpd
+    enabled: yes
+    state: started

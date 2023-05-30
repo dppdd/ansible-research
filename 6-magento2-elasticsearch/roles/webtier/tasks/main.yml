@@ -1,0 +1,18 @@
+---
+#webtier
+# CentOS 9 Stream host
+
+- name: Preheat environment - update all packages(exc. kernel), install tools
+  import_tasks: init-env.yml
+
+- name: Setup EPEL, REMI repositories. Install PHP
+  import_tasks: epel-remi-php.yml
+
+- name: Install web-server(HTTPD)
+  import_tasks: httpd.yml
+
+- name: Install MySQL
+  import_tasks: mysql.yml
+
+- name: Configure services(MySQL, HTTPD)
+  import_tasks: service-configs.yml

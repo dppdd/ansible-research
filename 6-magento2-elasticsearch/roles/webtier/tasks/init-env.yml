@@ -1,0 +1,22 @@
+---
+# init-env.yml
+#
+# Initial touch, updating the core packages, 
+# repos, and instal additional tools
+#
+
+- name: Upgrade all packages, excluding kernel
+  ansible.builtin.dnf:
+    name: '*'
+    state: latest
+    exclude: kernel*
+    
+- name: Install tools - ZIP, GIT
+  ansible.builtin.dnf:
+    name: "{{ linux_tools }}"
+    state: present
+
+- name: Install PIP
+  ansible.builtin.dnf:
+    name: python3-pip
+    state: latest

@@ -1,0 +1,6 @@
+---
+# magentoapp
+has_composer: /root/ansible_helpers/installed/composer.txt
+has_magento: /root/ansible_helpers/installed/magento.txt
+composer_install_script: install_composer.sh
+httpd_doc_root: /var/www/html

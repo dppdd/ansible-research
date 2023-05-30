@@ -1,0 +1,9 @@
+---
+- hosts: lampserver
+  become: true
+  roles:
+    - webtier
+    - magentoapp
+  vars_files:
+    - "./.env-keys.yml"
+    

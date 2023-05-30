@@ -1,0 +1,31 @@
+---
+# epel-remi-php.yml
+#
+# Here we configure the 
+# EPEL repo, REMI repo(containing PHP packages),
+# set modularity appstream
+# and install the PHP modules required by Magento
+#### TODO: fix the installation sequence in order to add HTTPD Restart handler
+#
+
+- name: Setup EPEL repository
+  ansible.builtin.dnf:
+    disable_gpg_check: True
+    name: "{{ epel_repo_url }}"
+    state: present
+
+- name: Setup Remi repository
+  ansible.builtin.dnf:
+    disable_gpg_check: True
+    name: "{{ remi_repo_url }}"
+    state: present
+
+- name: Install a modularity appstream with defined stream and profile
+  ansible.builtin.dnf:
+    name: "{{ remi_app_stream }}"
+    state: present
+
+- name: Install PHP and extensions
+  ansible.builtin.dnf:
+    name: "{{ php_extensions }}"
+    state: present

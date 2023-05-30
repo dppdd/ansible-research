@@ -1,0 +1,50 @@
+---
+# configure-elastic.yml
+#
+# Here, we remove the security module of ES for the sake of simplicity.
+# Later, we allow only magento app nodes IPs to avoid malicious attacks.
+#
+
+- name: Configure Elasticsearch
+  block:
+    - name:  Set Java heap size
+      ansible.builtin.template:
+        src: jvm.options.j2
+        dest: "{{ es_jvm_options_config }}"
+        owner: root
+        group: elasticsearch
+        mode: '0644'
+
+    - name: Set network host
+      ansible.builtin.replace:
+        path: "{{es_config}}"
+        regexp: '#network.host: 192.168.0.1'
+        replace: 'network.host: ["localhost", "{{ inventory_hostname }}"]'
+
+    - name: Set Port
+      ansible.builtin.replace:
+        path: "{{ es_config }}"
+        regexp: '#http.port: 9200'
+        replace: "http.port: {{ es_port }}"
+
+    - name: Set Cluster name
+      ansible.builtin.replace:
+        path: "{{ es_config }}"
+        regexp: '#cluster.name: my-application'
+        replace: "cluster.name: {{ es_cluster_name }}"
+
+    - name: Set Node name
+      ansible.builtin.replace:
+        path: "{{ es_config }}"
+        regexp: '#node.name: node-1'
+        replace: "node.name: {{ es_node_name }}"
+
+    # Security Issue. for dev Purpose only.
+    - name: Disable Security Mode
+      ansible.builtin.replace:
+        path: "{{ es_config }}"
+        regexp: 'xpack.security.enabled: true'
+        replace: 'xpack.security.enabled: false'
+        
+  notify:
+    - Restart elasticsearch

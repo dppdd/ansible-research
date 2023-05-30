@@ -1,0 +1,3 @@
+---
+- import_playbook: elasticserver.yml
+- import_playbook: lampserver.yml

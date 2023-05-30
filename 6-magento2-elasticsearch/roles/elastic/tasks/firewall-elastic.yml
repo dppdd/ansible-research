@@ -1,0 +1,43 @@
+---
+# firewall-elastic.yml
+# 
+# We reset the firewall in first place - 
+# to avoid duplicate records. ufw module does not check existing rules.
+# 
+
+- name: Firewall Configuration. Allow only mage-app port
+  block:
+    - name: Reset UFW
+      community.general.ufw:
+        state: reset
+
+    - name: Allow outgoing
+      community.general.ufw: 
+        default: allow
+        direction: outgoing
+
+    - name: Disallow incoming
+      community.general.ufw: 
+        default: deny
+        direction: incoming
+
+    - name: Establish regular admin rules
+      community.general.ufw:
+        rule: allow
+        direction: in
+        port: "{{ es_port }}"
+        proto: tcp
+        from_ip: '{{ item }}'
+      loop:
+        - "{{ groups.lampserver[0] }}"
+
+  always:
+    - name: Grant ssh access
+      community.general.ufw:
+        rule: allow
+        direction: in
+        port: "{{ ansible_port }}"
+        proto: tcp
+    - name: Enable firewall
+      community.general.ufw:
+        state: enabled

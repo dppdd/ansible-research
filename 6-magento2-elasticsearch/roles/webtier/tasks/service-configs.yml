@@ -1,0 +1,27 @@
+---
+# service-configs.yml
+
+- name: Configure HTTPD server
+  block:
+    - name: Increase memory limit for PHP-CLI
+      ansible.builtin.lineinfile:
+        path: /etc/php.ini
+        regexp: '^memory_limit'
+        line: memory_limit = 1024M
+
+    - name: Allow port 80
+      ansible.posix.firewalld:
+        port: 80/tcp
+        permanent: yes
+        immediate: yes
+        state: enabled
+
+    - name: Mod httpd, Enable .htaccess
+      ansible.builtin.copy:
+        src: httpd-mod.conf
+        dest: /etc/httpd/conf.d
+        owner: root
+        group: root
+        mode: '0644'
+  notify:
+    - Restart apache

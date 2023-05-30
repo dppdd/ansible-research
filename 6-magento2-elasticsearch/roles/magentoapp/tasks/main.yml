@@ -1,0 +1,12 @@
+---
+# magentoapp
+# CentOS 9 Stream host
+
+- name: Create MySQL db and user
+  import_tasks: mage-db.yml
+
+- name: Install Composer
+  import_tasks: composer.yml
+
+- name: Clone and install Magento
+  import_tasks: magento.yml

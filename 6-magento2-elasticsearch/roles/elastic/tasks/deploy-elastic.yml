@@ -1,0 +1,19 @@
+---
+# deploy-elastic.yml
+#
+# We first download ES, as the apt module
+# seems to always download the file
+#
+### TODO: This cource is again not optimial, you should first check if the service is available and then execute the download and install!
+
+- name: Download Elasticsearch, .deb package
+  ansible.builtin.get_url:
+    url: "{{ es_deb_url }}/{{ es_deb_file }}"
+    dest: "{{ es_deb_dest }}"
+
+- name: Install Elasticsearch, .deb package
+  ansible.builtin.apt:
+    deb: "{{ es_deb_dest }}{{ es_deb_file }}"
+    state: present
+  notify:
+    - Start and enable elasticsearch

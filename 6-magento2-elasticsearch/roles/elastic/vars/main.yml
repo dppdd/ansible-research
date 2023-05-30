@@ -1,0 +1,13 @@
+es_deb_file: elasticsearch-8.5.2-amd64.deb
+es_deb_url: https://artifacts.elastic.co/downloads/elasticsearch
+es_deb_dest: /opt/
+
+es_config: /etc/elasticsearch/elasticsearch.yml
+es_jvm_options_config: /etc/elasticsearch/jvm.options.d/jvm.options
+logstash_config: /etc/logstash/jvm.options
+beats_config: /etc/logstash/conf.d/beats.conf
+kibana_config: /etc/kibana/kibana.yml
+
+es_port: 9200
+es_cluster_name: mage-es-cluster
+es_node_name: mage-es-node

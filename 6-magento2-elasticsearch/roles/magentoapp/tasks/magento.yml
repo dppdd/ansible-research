@@ -1,0 +1,25 @@
+---
+# magento.yml
+#
+# Clone the Magento repo only if the doc root is empty.
+# Then composer install only if $has_magento file does not exist.
+#
+
+- name: List contents of directory
+  ansible.builtin.command: ls "{{ httpd_doc_root }}"
+  register: www_contents
+
+- name: Clone and install Magento project with all dependencies
+  community.general.composer:
+    command: create-project
+    arguments: "--repository-url=https://{{adobe_user}}:{{adobe_pass}}@repo.magento.com  magento/project-community-edition {{ httpd_doc_root }}"
+    working_dir: "{{ httpd_doc_root }}"
+  environment:
+    COMPOSER_ALLOW_SUPERUSER: 1
+    # prefer_dist: true
+  when: www_contents.stdout == ""
+
+- name: Install Magento application.
+  ansible.builtin.script: install_magento.sh "{{ inventory_hostname }}" "{{ groups.elasticserver[0] }}"
+  args:
+    creates: "{{ has_magento }}"

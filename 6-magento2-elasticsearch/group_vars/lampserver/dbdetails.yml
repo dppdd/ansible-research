@@ -1,0 +1,5 @@
+---
+dbname: mage_db
+dbuser: mage_user
+dbpass: mage_pass
+cent_db_socket: "/var/lib/mysql/mysql.sock"

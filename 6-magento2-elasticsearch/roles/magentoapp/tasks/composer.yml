@@ -1,0 +1,13 @@
+---
+# composer.yml
+
+# 
+# Installation performed in install_composer.sh
+# At the end of that script we create a file - $has_composer
+# We install composer only if that file does not exist.
+#
+
+- name: Install composer
+  ansible.builtin.script: "{{ composer_install_script }}"
+  args:
+    creates: "{{ has_composer }}"

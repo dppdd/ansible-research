@@ -1,0 +1,16 @@
+---
+# mage-db.yml
+
+- name: Create MySQL Database
+  mysql_db:
+    name: "{{ dbname }}"
+    state: present
+    login_unix_socket: "{{ cent_db_socket }}"
+
+- name: Create DB user and grant privileges
+  mysql_user:
+    name: "{{ dbuser }}"
+    password: "{{dbpass}}"
+    priv: "{{ dbname }}.*:ALL"
+    state: present
+    login_unix_socket: "{{ cent_db_socket }}"
