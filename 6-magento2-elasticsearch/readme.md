@@ -1,38 +1,24 @@
-# Build LAMP stack  
+# Complete deploy of Magento 2.4 application
 
-Deploying LAMP stack on Debian or RedHad based distributions. Then, seting up WordPress application.
+Ansible automation for bootstrapping Magento 2.4+ application.
 
- File structure:
+## Requirements  
+- [localhost] : Python3.9+, Ansible 2.14.*
+- [lampserver] : CentOS 9 Stream
+- [elasticserver] : Ubuntu 22.04 
 
+## How to use
+The `./ansible-init.sh` bash script can be used for easier configuration. The script will ask for the following information:  
+```sh
+IP of Magento server(LAMP + Magento)
+IP of Elasticsearch server
+Adobe username
+Adobe password
+```
+For more info about how to generate Adobe keys, please check [here](https://experienceleague.adobe.com/docs/commerce-operations/installation-guide/prerequisites/authentication-keys.html).
+Then you should execute
+```sh
+ansible-playbook -i inventory site.yml
+```
 
-    ├── ansible.cfg                    # Define SSH user, key and disable host key verification 
-    ├── lampservers.yml                # Define roles for LAMP servers
-    ├── production                     # Place IPs/hostnames of production machines
-    ├── readme.md
-    ├── roles                          # Here we place roles' files
-    │   ├── common
-    │   │   ├── handlers
-    │   │   └── tasks
-    │   │       ├── debian.yml         # Tasks for Debian OS
-    │   │       ├── main.yml           # Check OS and load the respective playbook
-    │   │       └── redhat.yml         # Tasks for CentOs OS
-    │   └── webtier
-    │       ├── handlers
-    │       ├── tasks
-    │       │   ├── debian.yml
-    │       │   ├── main.yml
-    │       │   └── redhat.yml
-    │       └── vars
-    │           └── main.yml           # Variables for webtier role
-    ├── site.yml                       # Main ansible gateway
-    ├── staging                        # Place IPs/hostnames of staging machines
-    └── vagrant                        # Directory containing Vagrant Boxes configs.
-        ├── Vagrantfile                # Main vagrant file
-        ├── provisioning-script.sh     # Provisioning script for each vagrant box
-        └── vagrant_rsa                # Private key that you can use for the connection.
-
-**Run ansible playbooks:**
-
-    ansible-playbook -i staging site.yml
-
-    ansible-playbook -i production site.yml
+## In-depth description of the project
