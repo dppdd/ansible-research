@@ -1,0 +1,20 @@
+---
+- name: Create Prometheus container
+  docker_container:
+    name: prometheus
+    restart_policy: always
+    image: "{{ docker_prometheus_image }}"
+    volumes: "{{ docker_prometheus_volumes }}"
+    command: "{{ docker_prometheus_command }}"
+    published_ports: "{{ ports.prometheus.on_host }}:{{ ports.prometheus.in_docker }}"
+
+- name: Create Grafana container
+  docker_container:
+    name: grafana
+    restart_policy: always
+    image: "{{ docker_grafana_image }}"
+    volumes: "{{ docker_grafana_volumes }}"
+    env:
+      GF_AUTH_ANONYMOUS_ENABLED: "{{ docker_grafana_gf_auth_anonymous }}"
+      GF_AUTH_ANONYMOUS_ORG_ROLE: "{{ docker_grafana_gf_auth_anonymous_role }}"
+    published_ports: "{{ ports.grafana.on_host }}:{{ ports.grafana.in_docker }}"

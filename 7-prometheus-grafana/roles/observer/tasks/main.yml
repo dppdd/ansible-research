@@ -1,0 +1,6 @@
+---
+- name: Create and deploy the configuration files
+  import_tasks: configs.yml
+
+- name: Create and start docker containers
+  import_tasks: dockers.yml

@@ -1,0 +1,15 @@
+---
+docker_gpg_key: "https://download.docker.com/linux/centos/gpg"
+docker_repo_base_url: "https://download.docker.com/linux/centos/$releasever/$basearch/stable"
+python_tools:
+  - python3-pip
+  - python3-setuptools
+docker_tools:
+  - docker-ce
+  - docker-ce-cli
+  - containerd.io
+
+# Beware, we install older version of requests.
+# Due to the bug with the urlib
+# https://github.com/psf/requests/issues/6432
+py_requests_version: 2.2.29

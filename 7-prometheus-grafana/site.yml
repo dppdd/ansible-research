@@ -1,0 +1,3 @@
+---
+# - import_playbook: playbook-targets.yml
+- import_playbook: playbook-observer.yml

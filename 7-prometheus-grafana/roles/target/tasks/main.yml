@@ -1,0 +1,19 @@
+---
+# Ports imported from $root/group_vars_all/ports.yml
+
+- name: Create and start NodeExporter Docker
+  docker_container:
+    name: node-exporter
+    restart_policy: always
+    image: "{{node_exporter_image}}:{{node_exporter_version}}"
+    volumes: "{{ node_exporter_volumes | list }}"
+    command: "{{ node_exporter_command }}"
+    published_ports: "{{ ports.node_exporter.on_host }}:{{ ports.node_exporter.in_docker }}"
+
+- name: Create and start cadvisor Docker
+  docker_container:
+    name: cadvisor
+    restart_policy: always
+    image: "{{ cadvisor_image }}:{{ cadvisor_version }}"
+    volumes: "{{ cadvisor_volumes | list }}"
+    published_ports: "{{ ports.cadvisor.on_host }}:{{ ports.cadvisor.in_docker }}"

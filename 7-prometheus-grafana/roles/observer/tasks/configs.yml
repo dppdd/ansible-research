@@ -1,0 +1,30 @@
+---
+- name: Create Prometheus directory on host
+  file:
+    path: "{{ on_host_prometheus_dir }}"
+    mode: 0755
+    state: directory
+
+- name: Create Grafana directory on host
+  file:
+    path: "{{ on_host_grafana_dir }}"
+    mode: 0755
+    state: directory
+
+- name: Deploy prometheus configuration file
+  ansible.builtin.template:
+    src: "{{ prometheus_config_template }}"
+    dest: "{{ on_host_prometheus_config }}"
+    mode: 0644
+
+- name: Create grafana configuration files
+  copy:
+    dest: /srv/
+    src: grafana
+    mode: 0644
+
+- name: Deploy grafana configuration datasources file 
+  ansible.builtin.template:
+    src: "{{ grafana_sources_template }}"
+    dest: "{{ on_host_grafana_datasources_config }}"
+    mode: 0644

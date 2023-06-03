@@ -1,0 +1,18 @@
+---
+#
+# All ports used for the playbooks are defined here.
+#
+
+ports:
+  prometheus:
+    on_host: 9090
+    in_docker: 9090
+  grafana:
+    on_host: 3000
+    in_docker: 3000
+  node_exporter:
+    on_host: 9100
+    in_docker: 9100
+  cadvisor:
+    on_host: 9101
+    in_docker: 8080

@@ -1,0 +1,7 @@
+---
+- hosts: observer
+  become: true
+  roles:
+    - docker-env
+    - observer
+    - target

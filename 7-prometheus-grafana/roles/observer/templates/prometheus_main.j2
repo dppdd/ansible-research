@@ -1,0 +1,19 @@
+# Notice here, that the following apps are separated on their own
+# docker containers, so localhost is local only on their containers
+
+global:
+  scrape_interval: 30s
+  # scrape_timeout is set to the global default (10s).
+
+scrape_configs:
+  - job_name: prometheus
+    static_configs:
+    - targets: ["localhost:{{ ports.prometheus.in_docker }}"]
+
+  - job_name: node-exporter
+    static_configs:
+    - targets: {{ [inventory_hostname + ':' + ports.node_exporter.on_host|string] + groups['targets'] | map('regex_replace', '$', ':' + ports.node_exporter.on_host|string) | list }}
+
+  - job_name: cadvisor
+    static_configs:
+    - targets: {{ [inventory_hostname + ':'+ ports.cadvisor.on_host|string] + groups['targets'] | map('regex_replace', '$', ':' + ports.cadvisor.on_host|string) | list }}

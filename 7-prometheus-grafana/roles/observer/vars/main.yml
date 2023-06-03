@@ -1,0 +1,36 @@
+---
+on_host_base_dir: /srv
+
+prometheus_config_template: prometheus_main.j2
+prometheus_config: prometheus.yml
+on_host_prometheus_dir: "{{ on_host_base_dir }}/prometheus"
+on_host_prometheus_config: "{{ on_host_prometheus_dir }}/{{ prometheus_config }}"
+
+grafana_sources_template: datasources_all_yml.j2
+on_host_grafana_dir: "{{ on_host_base_dir }}/grafana"
+on_host_grafana_datasources_config: "{{ on_host_grafana_dir }}/provisioning/datasources/all.yml"
+
+docker_prometheus_volumes:
+  - /srv/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml
+  - prometheus_main_data:/prometheus
+
+docker_prometheus_command: >
+  --config.file=/etc/prometheus/prometheus.yml
+  --storage.tsdb.path=/prometheus
+  --web.console.libraries=/etc/prometheus/console_libraries
+  --web.console.templates=/etc/prometheus/consoles
+  --web.enable-lifecycle
+
+docker_prometheus_version: latest
+docker_prometheus_image: "prom/prometheus:{{ docker_prometheus_version }}"
+
+docker_grafana_version: latest
+docker_grafana_image: "grafana/grafana:{{ docker_grafana_version }}"
+
+docker_grafana_volumes:
+  - grafana-data:/var/lib/grafana
+  - /srv/grafana/provisioning:/etc/grafana/provisioning
+  - /srv/grafana/dashboards:/var/lib/grafana/dashboards
+
+docker_grafana_gf_auth_anonymous: "true"
+docker_grafana_gf_auth_anonymous_role: "Admin"
