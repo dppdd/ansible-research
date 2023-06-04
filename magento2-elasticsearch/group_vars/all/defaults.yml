@@ -1,0 +1,3 @@
+---
+ansible_helper_dir: /root/ansible_helpers/installed
+web_doc_root: "/var/www/html"
