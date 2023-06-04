@@ -1,13 +1,15 @@
 ---
 # composer.yml
-
 # 
 # Installation performed in install_composer.sh
 # At the end of that script we create a file - $has_composer
-# We install composer only if that file does not exist.
+# We use that file as a flag and install composer only if it does not exist.
 #
 
 - name: Install composer
-  ansible.builtin.script: "{{ composer_install_script }}"
+  ansible.builtin.script: "{{ composer_install_script }} 
+    {{ ansible_helper_dir_installed }} 
+    {{ composer_binary }} 
+    {{ flag_file_composer }}"
   args:
     creates: "{{ has_composer }}"

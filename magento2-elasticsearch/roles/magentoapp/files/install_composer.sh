@@ -1,9 +1,12 @@
-echo "Install composer"
+#!/bin/bash
+# By default we install the latest composer version.
 # https://getcomposer.org/
 
 # Set Variables
+ansible_helper_dir=$1
+composer_bin=$2
+flag_file_composer=$3
 tmp_dir="/tmp/composer"
-ansible_helper_dir="/root/ansible_helpers/installed"
 
 # Create temp dir
 mkdir -p $tmp_dir && cd $tmp_dir
@@ -15,18 +18,19 @@ php composer-setup.php
 php -r "unlink('composer-setup.php');"
 
 # Move composer in $PATH
-mv composer.phar /usr/local/bin/composer
+mv composer.phar $composer_bin
 # Assure executable
-chmod +x /usr/local/bin/composer
+chmod +x $composer_bin
 
 # Leave a trace. 
-# This is done so we can set condition in ansible 
+# This is done so we can set condition in ansible:
 # to execute this script only if the below file does not exist.
+
 mkdir -p $ansible_helper_dir
-echo "composer version v2.5.5 installed" > "${ansible_helper_dir}/composer.txt"
+echo "composer version v2.5.5 installed" > "${ansible_helper_dir}/${flag_file_composer}"
 
 # Clean up tmp dir
-rm $tmp_dir
+rm -rf $tmp_dir
 
 # Print success message
 echo "Composer installation completed!"

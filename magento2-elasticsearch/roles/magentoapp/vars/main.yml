@@ -1,11 +1,21 @@
 ---
 # magentoapp
-has_composer: /root/ansible_helpers/installed/composer.txt
-has_magento: /root/ansible_helpers/installed/magento.txt
 composer_install_script: install_composer.sh
-httpd_doc_root: /var/www/html
+flag_file_composer: composer.txt
+has_composer: "{{ ansible_helper_dir_installed }}/{{ flag_file_composer }}"
+composer_binary: "/usr/local/bin/composer"
 
+magento_install_script_name: install_magento.sh
+flag_file_magento: magento.txt
+has_magento: "{{ ansible_helper_dir_installed }}/{{ flag_file_magento }}"
+
+# Magento related
+# TODO: use dict variable for all below
 dbname: mage_db
 dbuser: mage_user
 dbpass: mage_pass
 cent_db_socket: "/var/lib/mysql/mysql.sock"
+
+# Magento default credentials. You can separate them in .env
+mage_admin_user: admin
+mage_admin_pass: admin123_!
