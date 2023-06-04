@@ -10,13 +10,14 @@ Ansible automation for bootstrapping Magento 2.4+ application.
 ---
 
 ### Usage: Manual Run  
-- First add your hostnames or IPs into the `inventory` file. The file is also responsible for SSH configuration(port, flags). Remove the unused directives.
-- Create a file named `.env-keys.yml` with the following content, and define the API keys issued by Adobe:
+First add your hostnames or IPs into the `inventory` file. The file is also responsible for SSH configuration(port, flags). Remove the unused directives.  
 
-    adobe_user: 
+Create a file named `.env-keys.yml` with the following content, and define the API keys issued by Adobe:  
+
+    adobe_user:
     adobe_pass:
 
-- Execute Ansible playbooks `ansible-playbook -i inventory site.yml`
+Execute Ansible playbooks `ansible-playbook -i inventory site.yml`. 
 
 ### Usage: Automatic Run  
 The `./ansible-init.sh` bash script can be used for easier configuration. The script will ask for the following information:  
