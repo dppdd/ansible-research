@@ -9,9 +9,5 @@
   ansible.builtin.dnf:
     name: httpd
     state: latest
-
-- name: Start and enable HTTPD
-  ansible.builtin.service: 
-    name: httpd
-    enabled: yes
-    state: started
+  notify:
+    - Start and enable HTTPD

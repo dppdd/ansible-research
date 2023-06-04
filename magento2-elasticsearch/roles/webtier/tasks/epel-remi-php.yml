@@ -5,8 +5,8 @@
 # EPEL repo, REMI repo(containing PHP packages),
 # set modularity appstream
 # and install the PHP modules required by Magento
-#### TODO: fix the installation sequence in order to add HTTPD Restart handler
-#
+# TODO: fix the installation sequence in order to add HTTPD Restart handler
+# for now, leave it that way as there was an issue with the httpd installation before the PHP
 
 - name: Setup EPEL repository
   ansible.builtin.dnf:
@@ -29,3 +29,5 @@
   ansible.builtin.dnf:
     name: "{{ php_extensions }}"
     state: present
+  # notify:
+  #   - Restart apache

@@ -16,3 +16,15 @@ php_extensions:
   - php-gd
   - php-intl
   - php-zip
+mysql_packages:
+  - mariadb-server
+  - mariadb
+
+# PHP-CLI
+php_cli_ini_file: /etc/php.ini
+php_memory_limit: "memory_limit = 1024M"
+
+# custom httpd vHost
+httpd_custom_vhost_template: "httpd-mod-conf.j2"
+httpd_custom_vhost_name: "httpd-mod.conf"
+httpd_custom_vhost_include: "/etc/httpd/conf.d/{{ httpd_custom_vhost_name }}"

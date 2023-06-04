@@ -3,7 +3,7 @@
 # /etc/httpd/conf.d
 # It is included by default in HTTPD conf
 
-<Directory "/var/www/html">
+<Directory "{{web_doc_root}}">
     Options Indexes FollowSymLinks
     AllowOverride All
     Require all granted

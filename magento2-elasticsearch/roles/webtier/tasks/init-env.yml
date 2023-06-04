@@ -11,7 +11,7 @@
     state: latest
     exclude: kernel*
     
-- name: Install tools - ZIP, GIT
+- name: Install tools - ZIP, GIT, etc
   ansible.builtin.dnf:
     name: "{{ linux_tools }}"
     state: present

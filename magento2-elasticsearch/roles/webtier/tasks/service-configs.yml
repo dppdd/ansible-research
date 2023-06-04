@@ -5,9 +5,9 @@
   block:
     - name: Increase memory limit for PHP-CLI
       ansible.builtin.lineinfile:
-        path: /etc/php.ini
+        path: "{{ php_cli_ini_file }}"
         regexp: '^memory_limit'
-        line: memory_limit = 1024M
+        line: "{{ php_memory_limit }}"
 
     - name: Allow port 80
       ansible.posix.firewalld:
@@ -16,12 +16,10 @@
         immediate: yes
         state: enabled
 
-    - name: Mod httpd, Enable .htaccess
-      ansible.builtin.copy:
-        src: httpd-mod.conf
-        dest: /etc/httpd/conf.d
-        owner: root
-        group: root
-        mode: '0644'
+    - name: Deploy HTTPD custom config
+      ansible.builtin.template:
+        src: "{{ httpd_custom_vhost_template }}"
+        dest: "{{ httpd_custom_vhost_include }}"
+        mode: 0644
   notify:
     - Restart apache
