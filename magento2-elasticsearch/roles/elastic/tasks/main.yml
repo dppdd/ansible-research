@@ -1,10 +1,10 @@
 ---
 
-- name: Download, Install, Enable Elasticsearch
-  import_tasks: deploy-elastic.yml
+# - name: Download, Install, Enable Elasticsearch
+#   import_tasks: deploy-elastic.yml
 
-- name: Post-deploy elasticsearch configuration
-  import_tasks: configure-elastic.yml
+# - name: Post-deploy elasticsearch configuration
+#   import_tasks: configure-elastic.yml
 
-- name: Configure firewall
-  import_tasks: firewall-elastic.yml
+# - name: Configure firewall
+#   import_tasks: firewall-elastic.yml
