@@ -1,2 +1,3 @@
 .vagrant
 .env-keys.yml
+.DS_Store
