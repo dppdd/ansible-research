@@ -1,7 +1,0 @@
-db_volume: wpdbvol
-wpfs_vol: wpfsvol
-net: wpnetwork
-MARIADB_ROOT_PASSWORD: examplerootpass
-MARIADB_DATABASE: wpdockerdb
-MARIADB_USER: wpdockeruser
-MARIADB_PASSWORD: wpdockerpass
