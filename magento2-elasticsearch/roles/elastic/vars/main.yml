@@ -4,13 +4,11 @@ es_deb_dir: /opt
 es_deb_url: "{{ es_deb_repo }}/{{ es_deb_file }}"
 es_deb_dest: "{{ es_deb_dir }}/{{ es_deb_file }}"
 
-es_config: /etc/elasticsearch/elasticsearch.yml
-es_jvm_options_config: /etc/elasticsearch/jvm.options.d/jvm.options
-logstash_config: /etc/logstash/jvm.options
-beats_config: /etc/logstash/conf.d/beats.conf
-kibana_config: /etc/kibana/kibana.yml
+es_root_dir: /etc/elasticsearch
+es_config: "{{ es_root_dir }}/elasticsearch.yml"
+es_jvm_options_config: "{{ es_root_dir }}/jvm.options.d/jvm.options"
 
-es_port: 9200
 es_cluster_name: mage-es-cluster
 es_node_name: mage-es-node
 
+es_xpack_is_enabled: "false"

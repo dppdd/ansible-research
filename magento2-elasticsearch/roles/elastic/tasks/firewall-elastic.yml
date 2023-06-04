@@ -3,6 +3,9 @@
 # 
 # We reset the firewall in first place - 
 # to avoid duplicate records. ufw module does not check existing rules.
+#
+# Establish regular admin rules: if more than one Magento instance should be connected, 
+# the loop here should be reworked
 # 
 
 - name: Firewall Configuration. Allow only mage-app port
@@ -25,7 +28,7 @@
       community.general.ufw:
         rule: allow
         direction: in
-        port: "{{ es_port }}"
+        port: "{{ elasticsearch_port }}"
         proto: tcp
         from_ip: '{{ item }}'
       loop:

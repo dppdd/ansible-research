@@ -25,7 +25,7 @@
       ansible.builtin.replace:
         path: "{{ es_config }}"
         regexp: '#http.port: 9200'
-        replace: "http.port: {{ es_port }}"
+        replace: "http.port: {{ elasticsearch_port }}"
 
     - name: Set Cluster name
       ansible.builtin.replace:
@@ -44,7 +44,8 @@
       ansible.builtin.replace:
         path: "{{ es_config }}"
         regexp: 'xpack.security.enabled: true'
-        replace: 'xpack.security.enabled: false'
+        # replace: 'xpack.security.enabled: false'
+        replace: "xpack.security.enabled: {{ es_xpack_is_enabled }}"
         
   notify:
     - Restart elasticsearch
