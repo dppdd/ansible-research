@@ -2,7 +2,7 @@
 - hosts: lampserver
   become: true
   roles:
-    # - webtier
+    - webtier
     - magentoapp
   vars_files:
     - "./.env.yml"

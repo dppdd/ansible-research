@@ -4,5 +4,7 @@ ansible_port=9292
 ansible_user = root
 
 [lampserver]
+172.105.78.48
 
 [elasticserver]
+194.195.241.161
