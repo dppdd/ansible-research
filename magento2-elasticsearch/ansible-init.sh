@@ -6,7 +6,7 @@
 case "$1" in
 
 # Clear hosts file
--c) rm .env-keys.yml && cp scripts_samples/.env-keys.yml-sample .env-keys.yml
+-c) rm .env.yml && cp scripts_samples/.env.yml-sample .env.yml
     rm inventory && cp scripts_samples/inventory-sample inventory
     exit 0
     ;;
@@ -76,7 +76,7 @@ EOF
 
 
 echo "$template_inventory" > inventory
-echo "$template_mage_keys" > .env-keys.yml
+echo "$template_mage_keys" > .env.yml
 
 
 cat <<EOF
@@ -85,7 +85,7 @@ cat <<EOF
     If you defined an incorrect data, you can correct manually. Files edited are:
 
     inventory
-    .env-keys.yml
+    .env.yml
 
     You can also reset the files by executing the ./ansible-init.sh -c. 
 
