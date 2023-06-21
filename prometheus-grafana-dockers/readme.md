@@ -9,7 +9,7 @@ We deploy the following services with these Ansible roles:
 The master node is named `observer` as well as the respective Ansible role and inventory hosts. The monitored nodes are called `targets`. The stack runs on Docker containers. The cAdvisor service is used for monitoring the actual dockers.
 
 ## Requirements  
-Nodes - CentOS 9 stream
+Nodes - CentOS 9 stream  
 Local - Python3.9+, Ansible 2.14+
 
 
