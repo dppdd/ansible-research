@@ -1,6 +1,0 @@
----
-dbname: wpdb
-dbuser: wpdbuser
-dbpass: wpdbpass
-webpath: "/var/www/html"
-centsocket: "/var/lib/mysql/mysql.sock"

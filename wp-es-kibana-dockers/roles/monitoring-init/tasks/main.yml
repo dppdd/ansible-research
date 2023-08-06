@@ -1,9 +1,0 @@
----
-- name: Install and Configure Elasticsearch
-  import_tasks: elasticsearch.yml
-
-- name: Install and Configure Logstash
-  import_tasks: logstash.yml
-
-- name: Install and Configure Kibana
-  import_tasks: kibana.yml

@@ -1,7 +1,0 @@
----
-- hosts: 
-  - containers
-  become: true
-  roles:
-    - containers-init
-    - containers-webtier

@@ -1,4 +1,0 @@
----
-- import_playbook: playbook-localhost.yml
-- import_playbook: playbook-containers.yml
-- import_playbook: playbook-monitoring.yml
