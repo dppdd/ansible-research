@@ -29,9 +29,9 @@ The tests are not meant to be executed remotely. Download/clone this directory t
 ```console
 python -m venv venv
 
-pip install pytest
-
 . venv/bin/activate
+
+pip install pytest
 ```
 
 2. Run tests:
